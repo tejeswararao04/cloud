@@ -157,6 +157,9 @@
             event.preventDefault();
             const password = document.getElementById('password').value;
             const username=document.getElementById('username').value;
+
+            localStorage.setItem('username',username);
+            localStorage.setItem('password', password);
             console.log(username);
             const confirmPassword = document.getElementById('confirmPassword').value;
 
@@ -174,7 +177,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = '/profile'; // Redirect on success
+                        window.location.href = '/login'; // Redirect on success
                     } else {
                         alert(data.message); // Display error message
                     }
@@ -182,7 +185,7 @@
 
             // Add your code to store user details in the cloud database
             // Redirect to Person Profile Page (PPP)
-            window.location.href = 'profile.html';
+            window.location.href = '/login';
         }
     </script>
 </body>
