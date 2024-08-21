@@ -163,6 +163,20 @@ app.post('/login', (req, res) => {
 app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
+app.post('/signup', (req, res) => {
+    console.log("New signup")
+    const { userid, password } = req.body;
+    console.log(req.body)
+    db.get('INSERT INTO user (userid, password) VALUES (?, ?)', [userid, password], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).send('Server error');
+        }
+        if (row)
+            console.log("Done");
+        return res.status(200).send("Successfully registered");
+    });
+});
 
 // Route for Create Aadhaar Page
 app.post('/createaadhaar', ensureAuthenticated, (req, res) => {
